@@ -10,19 +10,22 @@ vscode + leetcode 插件：https://github.com/jdneo/vscode-leetcode
 1. 每个成员可根据自己的`名称`或者`昵称`新建自己的文件夹且必须在根目录下新建
   - 例如：
 
-    ```
-    reverse@xiaomiwujiecao  // 推荐使用这种方式新建文件夹
-    ```
+```
+reverse@xiaomiwujiecao  // 推荐使用这种方式新建文件夹
+```
+
 2. 每成员在自己的文件夹下更新自己的代码，每个 `demo` 必须包含自己的 `README.md`
     - 例如
-      ```
-      └── reverse@xiaomiwujiecao
-    └── demo1
-        ├── README.md
-        └── demo.py
 
-      ```
-    - `README.md` 中可以描述文件的目录 ，翻遍其他成员查看
+  ```
+  └── reverse@xiaomiwujiecao
+└── demo1
+    ├── README.md
+    └── demo.py
+
+  ```
+
+    - `README.md` 中可以描述文件的目录 ，方便其他成员查看
 
 
 3. 新建的文件类型可根据自己的主要开发语言更新，切记不能修改公共文件、，例如本文件，公共文件只能管理员修改

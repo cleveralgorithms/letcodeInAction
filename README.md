@@ -34,3 +34,11 @@ vscode + leetcode 插件：https://github.com/jdneo/vscode-leetcode
 #### 方法
 
 请阅读相关问题 ：  [点我](https://github.com/cleveralgorithms/letcodeInAction/issues/4)
+
+### 记住流程
+
+1. fork 本分支（主分支）
+2. 添加成员自己的文件夹，所有改动仅在自己的文件夹下更改
+3. 提交到自己的远程分值之前 记得 `git pull upstream master`
+4. 添加你的文件 并提交到自己的远程分支
+5. 需要 `pull Request` 直接在 `github` 的自己的 `master` 分支 进行操作

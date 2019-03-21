@@ -43,8 +43,19 @@ class Solution(object):
 
         return [-1,-1] 
 ```
+## 58. Length of Last Word
+- 2019-03-21
 
-
+题目要求返回一个字符串最后一个单词的长度 正常的字符串如"a boy"等都很容易，题目说如果最后一个词不存在则返回0；我测试了两次了解到这些对应的测试用例类似于： 'a '、' '、'   '；在Python中处理字符串很容易，字符串切分就用`split(' ')`，我的思路是清除最后的空格，如果切分后还是'',说明应该返回0；否则就是正常的len；代码如下：
+```python
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        s=s.strip()
+        if s=="":
+            return 0
+        w=len(s.split(' ')[-1])
+        return w
+```
 
 
 

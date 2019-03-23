@@ -1,10 +1,6 @@
 # Leetcode 刷题日志
 
-
-
 ## day1
-
-
 
 两数之和
 
@@ -17,23 +13,13 @@
 因为 nums[0] + nums[1] = 2 + 7 = 9
 所以返回 [0, 1]
 
-[代码]
+```
 
 
 
 [代码](https://github.com/cleveralgorithms/letcodeInAction/tree/master/leetcode%40hank/demo0321.py)
 
+## day2
 
+给定
 
-
-
-
-
-
-
-
-
-
-
-
-```

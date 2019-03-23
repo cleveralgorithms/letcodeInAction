@@ -17,9 +17,17 @@
 
 
 
-[代码](https://github.com/cleveralgorithms/letcodeInAction/tree/master/leetcode%40hank/demo0321.py)
+[代码](https://github.com/cleveralgorithms/letcodeInAction/tree/master/leetcode%40hank/demo0322.py)
 
 ## day2
 
-给定
+使用python的移位操作和按位或实现十进制数转二进制数
+
+[代码](https://github.com/cleveralgorithms/letcodeInAction/tree/master/leetcode%40hank/demo0323.py)
+
+## day3
+
+next
+
+
 

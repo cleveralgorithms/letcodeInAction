@@ -74,8 +74,25 @@ where a.Temperature>b.Temperature and datediff(a.RecordDate,b.RecordDate) =1;
 ```
 *datediff*等处理日期的函数该深入学一下；
 
+## 171. Excel Sheet Column Number
+- 2019-03-23
 
-
+周六，写一个easy题，这题是让我们把Excel中的列序数如A、AB、ZY、ABC等转为数值；相当于从A映射到0，然后B、C这样累加上去，
+分析发现就是把26进制转化为10进制；例如12相比于2是增加了一个分位，加了10^1。32比12增加了(3-2)\*10;302比2增加了10^(2);而AA比A增加了26;
+再加上最近复习了一下Python内置的`ord()`函数，测试有ord('A')=65,于是从A映射到1就直接用`ord('A')-64`，于是有：
+```python
+class Solution:
+    def titleToNumber(self, s: str) -> int:
+        n=list(s)
+        m=n[::-1] #翻转序列
+        c=0
+        for i in range(len(m)):
+            if i==0:
+                c=ord(m[i])-64 #A~Z 个位数的情况
+            else:
+                c+=(26**i)*(ord(m[i])-64) #其他位的情况
+        return c
+```
 
 
 

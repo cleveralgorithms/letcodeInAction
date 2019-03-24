@@ -93,6 +93,30 @@ class Solution:
                 c+=(26**i)*(ord(m[i])-64) #其他位的情况
         return c
 ```
+## 151. Reverse Words in a String
+- 2019-03-24
+
+还是写字符串类型的题目。151这题的标注是Medium难度，而且通过率不足20%，但看了描述之后觉得用Python实现不困难，代码如下，可以写得很简洁：
+```python
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        slst=s.split()
+        res=slst[::-1] #翻转列表
+        return ' '.join(res) #列表组合为字符串
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

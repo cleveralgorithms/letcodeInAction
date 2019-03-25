@@ -104,7 +104,16 @@ class Solution:
         res=slst[::-1] #翻转列表
         return ' '.join(res) #列表组合为字符串
 ```
+## 620. Not Boring Movies
+- 2019-03-25
 
+**Tag**:SQL;
+
+周一写个SQL题；选了一个easy题去写；注意not like就OK；
+
+```mysql
+select * from cinema where description not like "boring" and id % 2 != 0 order by rating desc;
+```
 
 
 

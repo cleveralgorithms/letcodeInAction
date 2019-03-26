@@ -115,7 +115,22 @@ class Solution:
 select * from cinema where description not like "boring" and id % 2 != 0 order by rating desc;
 ```
 
+## 215. Kth Largest Element in an Array
+- 2019-03-26
 
+求第k个最大的数，这题比较有趣的是可以有很多解法，可以暴力先排序，作为高频面试题，这种第K个的问题在数组很大的情况下用**堆**是标准答案，讨论区有个很好的解析文章，好好去理解。
+```python
+import heapq
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        nums = [-num for num in nums]
+        heapq.heapify(nums)
+        res = float('inf')
+        for _ in range(k):
+            res = heapq.heappop(nums)
+        return -res
+```
+-[ ] 去消化[ Python | 给你把这道题讲透](https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/167837/Python-or-tm)
 
 
 

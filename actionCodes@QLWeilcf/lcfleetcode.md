@@ -132,9 +132,55 @@ class Solution(object):
 ```
 -[ ] 去消化[ Python | 给你把这道题讲透](https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/167837/Python-or-tm)
 
+## 160. Intersection of Two Linked Lists
+- 2019-03-27
 
+找到链表的第一个交点，刚开始确实不会优秀的解法，于是复习了一下链表的高频考题：链表是否有环、链表是否相交、求第一个交点等；这题的一种解法是：
 
+> 采用对齐的思想。计算两个链表的长度 L1 , L2，分别用两个指针 p1 , p2 指向两个链表的头，然后将较长链表的 p1（假设为 p1）向后移动L2 - L1个节点，然后再同时向后移动p1 , p2，直到 p1 = p2。相遇的点就是相交的第一个节点。
 
+我看讨论区还有用栈的，全部入栈然后pop出来，也是一种解法。
+```python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+
+        l1,l2=0,0
+        h1=headA
+        h2=headB
+        while h1:
+            l1+=1
+            h1=h1.next
+        while h2:
+            l2+=1
+            h2=h2.next
+        p1=headA
+        p2=headB
+        if l1<l2:
+            for i in range(l2-l1):
+                p2=p2.next
+        else:
+            for i in range(l1-l2):
+                p1=p1.next
+        
+        while p1:
+            if p1==p2:
+                return p1
+            else:
+                p1=p1.next
+                p2=p2.next
+        return None
+
+```
 
 
 

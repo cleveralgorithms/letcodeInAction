@@ -182,7 +182,27 @@ class Solution(object):
 
 ```
 
+## 21. Merge Two Sorted Lists
+- 2019-03-28
 
+合并两个链表，用常规思路就是用好if判断，看到一个不错的答案用到了递归，值得学习
+```python
+class Solution(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        if not l1 or not l2:
+            return l1 or l2
+        if l1.val < l2.val:
+            l1.next = self.mergeTwoLists(l1.next, l2)
+            return l1
+        else:
+            l2.next = self.mergeTwoLists(l1, l2.next)
+            return l2 
+```
 
 
 

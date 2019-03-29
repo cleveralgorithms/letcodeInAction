@@ -203,8 +203,31 @@ class Solution(object):
             l2.next = self.mergeTwoLists(l1, l2.next)
             return l2 
 ```
+## 169. Majority Element
+- 2019-03-29
 
+找出数组中出现次数大于一半的元素，这个我觉得那个O(n)的解法很有价值，因此按照这个去学习，讨论区Python最高赞是用sorted排序，很优雅，但从算法来说，Moore's voting algorithm更值得消化。`return sorted(num)[len(num)/2]`。
 
+```python
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # implement the Moore's voting algorithm: find a pair different element and delete it
+        count = 0
+        for i in range(0, len(nums)):
+            if count == 0:
+                key = nums[i]
+                count = 1
+            else:
+                if key == nums[i]:
+                    count += 1
+                else:
+                    count -= 1
+        return key
+```
 
 
 

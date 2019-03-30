@@ -228,10 +228,32 @@ class Solution(object):
                     count -= 1
         return key
 ```
+## 3. Longest Substring Without Repeating Characters
+- 2019-03-30
 
+最长不重复子串。参考了Solution里面的思想。
 
+```python
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        start = maxLength = 0 #初始值
+        usedChar = {}
+        
+        for i in range(len(s)):
+            if s[i] in usedChar and start <= usedChar[s[i]]:
+                start = usedChar[s[i]] + 1
+            else:
+                if maxLength <1+i-start:
+                    maxLength = 1+i-start
 
+            usedChar[s[i]] = i
 
+        return maxLength
+```
 
 
 

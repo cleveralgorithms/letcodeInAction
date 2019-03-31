@@ -3,7 +3,7 @@ lcfleetcode
 ## 前言
 随着leetcode进入千题时代，刷题的姿势对效果的作用也是很大的；打算按着知识点类型进行划分，不按照题目序号刷
 
-## two-sum 
+## 1. two-sum 
 - 2019-03-20
 
 tag:**math**
@@ -254,9 +254,28 @@ class Solution(object):
 
         return maxLength
 ```
+## 7. Reverse Integer
+- 2019-03-31
 
-
-
+直接利用列表的参数去逆转：
+```python
+class Solution(object):
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        res=0
+        if x<0:
+            res=-int(str(x)[::-1][:-1])
+        else:
+            res=int(str(x)[::-1])
+        #res=-int(str(x)[::-1][:-1]) if x<0 else int(str(x)[::-1])
+        if res<-2**31 or res+1>2**31:
+            return 0
+        return res
+```
+还可以用栈去逆置，需要O(n)的额外空间，并且需要关注是否会栈溢出。。O(log(n))的做法。。
 
 
 

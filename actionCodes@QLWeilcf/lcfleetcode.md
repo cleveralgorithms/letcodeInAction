@@ -301,7 +301,28 @@ class Solution(object):
         return s[l+1:r]
 ```
 
+## 4. Median of Two Sorted Arrays
+- 2019-04-01
 
+这是个hard题，因为刷一个每日签到到了这题。暴力法easy，要O(min(n,m))不容易。
+
+参考：[Share-my-O(log(min(mn))-solution-with-explanation](https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2481/Share-my-O(log(min(mn))-solution-with-explanation)
+```python
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        curr = prev = 0
+        total = len(nums1) + len(nums2)
+        nums = nums1 + list(reversed(nums2))
+        while total - len(nums) < (1 + int(total / 2)):
+            index = -1 if nums[0] > nums[-1] else 0
+            prev, curr = curr, nums.pop(index)
+        return curr if total % 2 else (prev + curr) / 2.0
+```
 
 
 

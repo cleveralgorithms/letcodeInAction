@@ -324,7 +324,35 @@ class Solution(object):
         return curr if total % 2 else (prev + curr) / 2.0
 ```
 
+## 46. Permutations
+- 2019-04-02
 
+输出数值型列表的全排列,递归的核心思路是**将每个元素放到余下n-1个元素组成的队列最前方，对剩余元素进行递归全排列**。今天整理了一篇笔记文章：[Ann全排列的枚举_递归实现(基于Python)@jianshu](https://www.jianshu.com/p/a5aed1bf5c80)
+
+```python
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type lst: List[int]
+        :rtype: List[List[int]]
+        """
+        n=len(nums)
+        if n<=1:
+            return [nums]
+        elif n==2:
+            return [[nums[0],nums[1]],[nums[1],nums[0]]]
+        kk=[]
+        for i in range(n):
+            nlst=nums[0:i]+nums[i+1:] 
+            c=self.permute(nlst)
+            ss=[]
+            for j in c:
+                w=[nums[i]]
+                w.extend(j)
+                ss.append(w)
+            kk.extend(ss)
+        return kk
+```
 
 
 

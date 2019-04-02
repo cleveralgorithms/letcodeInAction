@@ -380,13 +380,24 @@ class Solution(object):
 
 ```
 
+## 11. Container With Most Water
+- 2019-04-02
 
+容器最多能装多少水。
 
+看讨论区大家的高赞解法是O(n)
 
+```python
 
+```
 
+## 42. Trapping Rain Water
 
+这题2018年在面试中遇到过，当时想了好久才推出递归写法，早就后悔没多刷题了，看到这题更后悔没早点多刷题了。
+```python
+# 等我找到我以前的解法
 
+```
 
 
 

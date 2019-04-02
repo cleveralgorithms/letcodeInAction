@@ -390,6 +390,39 @@ class Solution(object):
 ```python
 
 ```
+## 15. 3Sum
+- 2019-04-03
+
+从列表中选出三个数a，b，c，满足sum(a,b,c)==0。暴力法，三个循环，O(n^3)。用字典可以降低一层复杂度。讨论区大家普遍先排序。
+```python
+class Solution(object):
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        N=len(nums)
+        res=[]
+        for i in range(N):
+            if i > 0 and nums[i] == nums[i-1]: #两个元素相同时，i再走一步
+                continue
+            target =-nums[i]
+            s,e = i+1, N-1
+            while s<e: #下面就是循环试 s+e=target  化归到2sum
+                if nums[s]+nums[e] == target:
+                    res.append([nums[i], nums[s], nums[e]])
+                    s = s+1
+                    while s<e and nums[s] == nums[s-1]:
+                        s = s+1
+                elif nums[s] + nums[e] < target:
+                    s = s+1
+                else:
+                    e = e-1
+        return res
+```
+
+
 
 ## 42. Trapping Rain Water
 
@@ -398,6 +431,9 @@ class Solution(object):
 # 等我找到我以前的解法
 
 ```
+
+
+
 
 
 

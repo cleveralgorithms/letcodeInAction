@@ -354,8 +354,31 @@ class Solution(object):
         return kk
 ```
 
+## 2. Add Two Numbers
 
+- 2019-04-02
 
+正常解法：循环节点相加放到列表里再合并为一个新链表，O(max(m,n))，现在用Python解链表题还不够熟练,后续专题写一下链表题。在讨论区发现了一种“流氓”解法，写一个toint和tolist函数变成整数计算再解包为链表。
+
+```python
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        addends = l1, l2
+        dummy = end = ListNode(0)
+        carry = 0
+        while addends or carry:
+            carry += sum(a.val for a in addends)
+            addends = [a.next for a in addends if a.next]
+            end.next = end = ListNode(carry % 10)
+            carry /= 10
+        return dummy.next
+
+```
 
 
 

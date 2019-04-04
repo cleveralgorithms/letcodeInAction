@@ -421,6 +421,38 @@ class Solution(object):
                     e = e-1
         return res
 ```
+## 20. Valid Parentheses
+- 2019-04-04
+
+合法的括号，很经典的用**栈**这种先进后出(FILO)数据结构的题目，思路就是对字符串`s`遍历，如果是左括号，入栈，遇到右括号，看栈顶(就是最新加入栈的元素)是否是对应的左括号，如果不是，直接是false，如果是，这个左括号出栈。当遍历完了栈正好空则true。同时考虑只有左或右括号的情况，考虑判断时栈为空的情况。
+```python
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        stack=[] #用栈的做法
+        left=['(','[','{']
+        right=[')',']','}']
+        for i in s:
+            if i in left:
+                stack.append(i)
+            else:
+                for j,v in enumerate(right):
+                    if i==v:
+                        if len(stack)==0:
+                            return False
+                        elif stack[-1]==left[j]: #peek
+                            stack.pop()
+                            break #break for j,v
+                        else:
+                            return False
+        if len(stack)>0:
+            return False
+        return True #len==0 才是true
+```
+
 
 
 
@@ -433,6 +465,9 @@ class Solution(object):
 ```
 
 
+
+逆序的好处：方便add；
+顺序的好处：翻下来的时候可以顺路看之前的笔记，顺序符合心理认知。
 
 
 

@@ -452,6 +452,63 @@ class Solution(object):
             return False
         return True #len==0 才是true
 ```
+## 17. Letter Combinations of a Phone Number
+- 2019-04-05
+
+也算是一个排列组合题，可以用回溯法解。
+
+```python
+class Solution(object): #暴力法
+    def letterCombinations(self, digits):#digits: str
+        phone = {'2': ['a', 'b', 'c'],'3': ['d', 'e', 'f'],
+                 '4': ['g', 'h', 'i'],'5': ['j', 'k', 'l'],
+                 '6': ['m', 'n', 'o'],'7': ['p', 'q', 'r', 's'],
+                 '8': ['t', 'u', 'v'],'9': ['w', 'x', 'y', 'z']} #忽略1
+        if not digits:
+            return []
+        res=phone[digits[0]]
+        for d in digits[1:]:
+            ks=phone[d]
+            nres=[]
+            for i in ks:
+                nres.extend([r+i for r in res]) #感觉比下面更高效些
+            #for r in res:nres.extend([r+i for i in ks])
+            res=nres
+        return res
+```
+上面的解法：
+Runtime: 36 ms, faster than 8.86%；Memory Usage: 12.2 MB, less than 5.15%；
+用官方的回溯法的话:Runtime: 24 ms, faster than 26.82%； Memory Usage: 12.2 MB, less than 5.15%； 内存用量相同，速度更快些。回溯法是O((3^Nx4^M)的时间复杂度。
+```python
+class Solution(object):
+    def letterCombinations(self, digits):
+        phone = {'2': ['a', 'b', 'c'],'3': ['d', 'e', 'f'],
+                 '4': ['g', 'h', 'i'],'5': ['j', 'k', 'l'],
+                 '6': ['m', 'n', 'o'],'7': ['p', 'q', 'r', 's'],
+                 '8': ['t', 'u', 'v'],'9': ['w', 'x', 'y', 'z']} #忽略1
+        def backtrack(combination, next_digits):
+            # if there is no more digits to check
+            if len(next_digits) == 0:
+                # the combination is done
+                output.append(combination)
+            # if there are still digits to check
+            else:
+                # iterate over all letters which map 
+                # the next available digit
+                for letter in phone[next_digits[0]]:
+                    # append the current letter to the combination
+                    # and proceed to the next digits
+                    backtrack(combination + letter, next_digits[1:])
+                    
+        output = []
+        if digits:
+            backtrack("", digits)
+        return output
+```
+
+
+
+
 
 
 

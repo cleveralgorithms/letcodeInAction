@@ -505,9 +505,32 @@ class Solution(object):
             backtrack("", digits)
         return output
 ```
+## 29. Divide Two Integers
+- 2019-04-06 清明
 
-
-
+不用乘法、除法符号求两个数相除的商，能用的就是加减和位运算了。（Python的）位运算需要去复习。
+```python
+class Solution(object):
+    def divide(self, dividend, divisor):
+        """
+        :type dividend: int
+        :type divisor: int
+        :rtype: int
+        """
+        positive = (dividend < 0) is (divisor < 0)
+        dividend, divisor = abs(dividend), abs(divisor)
+        res = 0
+        while dividend >= divisor:
+            temp, i = divisor, 1
+            while dividend >= temp:
+                dividend -= temp
+                res += i
+                i <<= 1
+                temp <<= 1
+        if not positive:
+            res = -res
+        return min(max(-2147483648, res), 2147483647)
+```
 
 
 

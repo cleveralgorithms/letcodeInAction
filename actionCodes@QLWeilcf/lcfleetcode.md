@@ -453,7 +453,7 @@ class Solution(object):
         return True #len==0 才是true
 ```
 ## 17. Letter Combinations of a Phone Number
-- 2019-04-05
+- 2019-04-05 清明
 
 也算是一个排列组合题，可以用回溯法解。
 
@@ -506,7 +506,7 @@ class Solution(object):
         return output
 ```
 ## 29. Divide Two Integers
-- 2019-04-06 清明
+- 2019-04-06
 
 不用乘法、除法符号求两个数相除的商，能用的就是加减和位运算了。（Python的）位运算需要去复习。
 ```python
@@ -531,8 +531,28 @@ class Solution(object):
             res = -res
         return min(max(-2147483648, res), 2147483647)
 ```
+## 26. Remove Duplicates from Sorted Array
+- 2019-04-07
 
-
+这题要求比较多，在O(1)的额外空间使用下，修改数组的前面变成没有重复值的数组，同时不管后面的值了，返回是没有重复值的数组的长度。用set(nums)居然无效。
+不过双指针法也不难理解。
+```python
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        newTail = 0
+        #用两个指针，一个从0慢慢走，修改走到的位置，一个往前走
+        for i in range(1, len(nums)):
+            if nums[i] != nums[newTail]:
+                newTail += 1
+                nums[newTail] = nums[i]
+        return newTail + 1
+```
 
 
 

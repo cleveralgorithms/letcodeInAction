@@ -621,6 +621,37 @@ class Solution(object):
 
         return lo
 ```
+## 27. Remove Element
+- 2019-04-10
+
+把等于目标值的数从数组中原地删除，不能用超过O(n)的额外空间，这个的实现还是很值得思考的。当然实际中多用空间也不失为太差的解法，巨量数据时反复移动不一定比加到新数组优秀。
+```python
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        nextPos = 0
+        for num in nums:
+            if num != val:
+                nums[nextPos] = num
+                nextPos += 1
+        return nextPos
+```
+在评论区看到一种暴力方法，当然这种方法值得质疑和思考
+```python
+def removeElement(self, nums, val):
+    try:
+        while True:
+            nums.remove(val)
+    except:
+        return len(nums)
+```
+> Since we don't know the implementation of the remove func, so you cannot make sure it fits the limitation of O(1) memory 
+(不知道remove的机制，不能保证满足O(1)的空间限制)
+> 列表每次Delete Item是O(n)，所以加上while会是O(n^2)，确实暴力。
 
 
 ## 42. Trapping Rain Water

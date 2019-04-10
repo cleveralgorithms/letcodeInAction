@@ -652,6 +652,47 @@ def removeElement(self, nums, val):
 > Since we don't know the implementation of the remove func, so you cannot make sure it fits the limitation of O(1) memory 
 (不知道remove的机制，不能保证满足O(1)的空间限制)
 > 列表每次Delete Item是O(n)，所以加上while会是O(n^2)，确实暴力。
+## 39. Combination Sum
+- 2019-04-11
+
+一个需要遍历各种情况的题，比较好的解法是动规或深度优先搜索。
+```python
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        candidates.sort() #动规
+        dp = [[[]]] + [[] for i in xrange(target)]
+        for i in xrange(1, target + 1):
+            for number in candidates:
+                if number > i: break
+                for L in dp[i - number]:
+                    if not L or number >= L[-1]: dp[i] += L + [number],
+        return dp[target]
+```
+dfs的解法：
+```python
+def combinationSum(self, candidates, target):
+    res = []
+    candidates.sort()
+    self.dfs(candidates, target, 0, [], res)
+    return res
+    
+def dfs(self, nums, target, index, path, res):
+    if target < 0:
+        return  # backtracking
+    if target == 0:
+        res.append(path)
+        return 
+    for i in xrange(index, len(nums)):
+        self.dfs(nums, target-nums[i], i, path+[nums[i]], res)
+```
+
+
+
 
 
 ## 42. Trapping Rain Water

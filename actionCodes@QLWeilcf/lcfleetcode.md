@@ -690,7 +690,37 @@ def dfs(self, nums, target, index, path, res):
     for i in xrange(index, len(nums)):
         self.dfs(nums, target-nums[i], i, path+[nums[i]], res)
 ```
+## 48. Rotate Image
+- 2019-04-12
 
+ in-place是值得思考的，暴力法是用O(N^2)的额外空间，我试了一下，是5.30%的空间优先率，很低了。
+ ```python
+ class Solution(object):
+    def rotate(self, matrix):#暴力法
+        nm=[]
+        n=len(matrix) #i==j
+        i,j=0,0
+        for i in range(n):
+            m=[matrix[j][i] for j in range(n-1,-1,-1)]
+            nm.append(m)
+        for i in range(n):
+            for j in range(n):
+                matrix[i][j]=nm[i][j]
+    def rotate2n2(self,matrix):
+        matrix[::] = zip(*matrix[::-1]) # matrix[::-1]->O(n^2), zip()-> O(n^2), 
+        #although matrix[::] ask for an in-place replacement, take extra O(2n^2) extra space.
+    def rotate2(self, matrix):
+        n = len(matrix)#这种方法没去验证
+        for l in xrange(n / 2):
+            r = n - 1 - l
+            for p in xrange(l, r):
+                q = n - 1 - p #q=~p  
+                cache = matrix[l][p]
+                matrix[l][p] = matrix[q][l]
+                matrix[q][l] = matrix[r][q]
+                matrix[r][q] = matrix[p][r]
+                matrix[p][r] = cache
+ ```
 
 
 

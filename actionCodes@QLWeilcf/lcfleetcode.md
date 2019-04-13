@@ -781,6 +781,45 @@ class Solution(object):
                     return False
         return True
 ```
+## 47. Permutations II
+- 2019-04-14
+
+和46题的区别是这次输入可以包含重复的数字，例如可以输入`[1,1,2]`，有更巧妙的解法，但暴力法是用46题的递归然后对生成的结果去重（最后去重或每次递归都去重）
+
+```python
+class Solution(object):
+    def permuteUnique(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        n=len(nums)
+        if n<=1:
+            return [nums]
+        elif n==2: #注意这部分输入的坑
+            if nums[0]==nums[1]:
+                return [nums]
+            return [[nums[0],nums[1]],[nums[1],nums[0]]]
+        kk=[]
+        for i in range(n):
+            nlst=nums[0:i]+nums[i+1:] 
+            c=self.permuteUnique(nlst)
+            ss=[]
+            for j in c:
+                w=[nums[i]]
+                w.extend(j)
+                ss.append(w)
+            kk.extend(ss)
+            ks=[]
+            for k in kk:
+                if k not in ks:
+                    ks.append(k)
+            kk=ks
+        return kk
+```
+
+
+
 
 
 ## 42. Trapping Rain Water

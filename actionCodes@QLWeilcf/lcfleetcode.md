@@ -817,7 +817,32 @@ class Solution(object):
             kk=ks
         return kk
 ```
+## 50. Pow(x, n)
+- 2019-04-15
 
+自己去实现乘方。因为输入的n是包含负数且到2^31-1，还是需要考虑边界和超限的，在Python里这些问题比较容易解决。说回实现上，暴力法是直接循环n次算乘法，我知道还有递推公式，只记得了偶数`x^n=x^{n/2}*x^{n/2}`；奇数`x^n=x^{n/2}*x^{n/2}*x`；在《编程之美》里还有迭代法，之后再研究。
+```python
+class Solution(object):
+    def myPow(self, x, n):
+        if n==0:
+            return 1
+        elif n==1:
+            return x
+        npow=True if n<0 else False
+        if npow: #负数的情况，只需要在递归的最后一次变成倒数就好，递归里面用正数算
+            n=-n
+            kx=self.myPow(x,n//2)
+            if n%2==0:#偶数
+                return 1/(kx*kx)
+            else:
+                return 1/(kx*kx*x)
+        else:
+            kx=self.myPow(x,n//2)
+            if n%2==0:#偶数
+                return kx*kx
+            else:
+                return kx*kx*x
+```
 
 
 

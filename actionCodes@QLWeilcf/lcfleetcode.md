@@ -843,6 +843,54 @@ class Solution(object):
             else:
                 return kx*kx*x
 ```
+## 35. Search Insert Position
+- 2019-04-16
+
+排序数组，显然最优是用二分；
+
+```python
+class Solution(object):
+    def searchInsert(self, nums, target):
+        if target > nums[len(nums) - 1]:
+            return len(nums)
+
+        if target < nums[0]:
+            return 0
+
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            m = (l + r)/2
+            if nums[m] > target:
+                r = m - 1
+                if r >= 0:
+                    if nums[r] < target:
+                        return r + 1
+                else:
+                    return 0
+
+            elif nums[m] < target:
+                l = m + 1
+                if l < len(nums):
+                    if nums[l] > target:
+                        return l
+                else:
+                    return len(nums)
+            else:
+                return m
+```
+在评论区发现一些很神奇的解法：一行：`return len([x for x in nums if x<target])`  O(n);
+```python
+try:
+    return nums.index(target)
+except:
+    nums.append(target)
+    nums.sort() #O(nlog(n))
+    return nums.index(target)
+```
+
+
+
+
 
 
 

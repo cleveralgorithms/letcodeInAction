@@ -887,8 +887,30 @@ except:
     nums.sort() #O(nlog(n))
     return nums.index(target)
 ```
+## 19. Remove Nth Node From End of List
+- 2019-04-17
 
+链表题，复杂度不高，但要实现很高效也比较有挑战
 
+```python
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        fast = slow = head
+        for _ in range(n):
+            fast = fast.next
+        if not fast:
+            return head.next
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
+        return head
+```
 
 
 

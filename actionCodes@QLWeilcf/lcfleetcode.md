@@ -911,8 +911,71 @@ class Solution(object):
         slow.next = slow.next.next
         return head
 ```
+## 56. Merge Intervals
+- 2019-04-18
 
+合并区间，不排序的话就需要每次比较时往前看（一个while或for循环在一个for循环里），需要O(n^2)，因此还是排序吧，根据首个元素排序后的判断就容易了
+```python
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        if not intervals:
+            return []
+        intervals=sorted(intervals,key=lambda j:j[0])
+        res=[]
+        cur=intervals[0]
+        res.append(cur)
+        for i in intervals:
+            if res[-1][1]>=i[0] and res[-1][1]<i[1]:
+                res[-1][1]=i[1]
+            elif res[-1][1]<i[0]:
+                res.append(i)
+            else:
+                pass
+        return res
+```
+官方解法，list.start这种写法在自己的编译器上运行不了，查2.7.1和3.7的官方文档都没有。`AttributeError: 'list' object has no attribute 'start'`
 
+```python
+class Solution:#官方解法
+    def merge(self, intervals):
+        intervals.sort(key=lambda x: x.start)
+        merged = []
+        for interval in intervals:
+            # if the list of merged intervals is empty or if the current
+            # interval does not overlap with the previous, simply append it.
+            if not merged or merged[-1].end < interval.start:
+                merged.append(interval)
+            else:
+            # otherwise, there is overlap, so we merge the current and previous
+            # intervals.
+                merged[-1].end = max(merged[-1].end, interval.end)
+        return merged
+```
+## 59. Spiral Matrix II
+- 2019-04-18
+
+这次不是展开螺旋矩阵了，是生成；
+```python
+class Solution(object):
+    def generateMatrix(self, n):
+        """
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        A = [[0] * n for _ in range(n)]
+        i, j, di, dj = 0, 0, 0, 1
+        for k in range(n*n):
+            A[i][j] = k + 1
+            if A[(i+di)%n][(j+dj)%n]:
+                di, dj = dj, -di
+            i += di
+            j += dj
+        return A
+```
 
 
 

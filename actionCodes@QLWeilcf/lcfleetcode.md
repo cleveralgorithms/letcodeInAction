@@ -976,13 +976,45 @@ class Solution(object):
             j += dj
         return A
 ```
+## 38. Count and Say
+- 2019-04-19
+
+这是个easy题，还是很巧妙的，计算n时n-1情况下值的计数形成一个新数（返回值为str类型），n取决于n-1，所以有递推，推导出递推式子后写递归。关键是统计出连续的值有多少个，在连续时，count，不连续时换新的count。
+```python
+class Solution(object):
+    def countAndSay(self, n):
+        if n==1: #终止条件
+            return '1'
+        res=''
+        nm=self.countAndSay(n-1)
+        k=len(nm)
+        cv=[nm[0],0]  #当前计数的值 可以用dict {nm[0]:0}
+        for i in nm:
+            if i==cv[0]:
+                cv[1]=cv[1]+1
+            else: #不连续时，记录之前的状态+重置cv
+                res='{0}{1}{2}'.format(res,cv[1],cv[0])
+                cv=[i,1]
+        res='{0}{1}{2}'.format(res,cv[1],cv[0])
+        return res
+
+```
+
+
+
+
+
+
+
+
+
 
 
 
 
 ## 42. Trapping Rain Water
 
-这题2018年在面试中遇到过，当时想了好久才推出递归写法，早就后悔没多刷题了，看到这题更后悔没早点多刷题了。
+这题2018年在面试中遇到过，当时想了好久才推出递归写法，早就后悔没多刷题了，看到这题更后悔没早点多刷题了。不愧是第42题。
 ```python
 # 等我找到我以前的解法
 

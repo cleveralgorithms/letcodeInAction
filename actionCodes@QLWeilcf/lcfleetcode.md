@@ -999,7 +999,19 @@ class Solution(object):
         return res
 
 ```
+## 62. Unique Paths
+- 2019-04-20
 
+这是很有趣的题，用动规解，记得可以推出一个规则的。
+```python
+class Solution(object):
+    def uniquePaths(self, m, n):
+        dp = [1] * n
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[j] = dp[j - 1] + dp[j]
+        return dp[-1] if m and n else 0
+```
 
 
 

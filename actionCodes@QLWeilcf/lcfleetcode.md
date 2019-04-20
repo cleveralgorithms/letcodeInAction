@@ -1012,6 +1012,30 @@ class Solution(object):
                 dp[j] = dp[j - 1] + dp[j]
         return dp[-1] if m and n else 0
 ```
+## 64. Minimum Path Sum
+- 2019-04-21
+
+这种全局最优显然要考虑递归，类似背包问题。
+```python
+class Solution(object):
+    def minPathSum(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+        c,r = len(grid),len(grid[0])    
+        for i in range(c):
+            for j in range(r):
+                if i ==0 and j ==0:
+                    continue
+                elif i == 0:
+                    grid[i][j] += grid[i][j-1]
+                elif j == 0:
+                    grid[i][j] += grid[i-1][j]
+                else:
+                    grid[i][j] += min(grid[i][j-1], grid[i-1][j])              
+        return grid[-1][-1]
+```
 
 
 

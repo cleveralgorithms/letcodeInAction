@@ -1036,7 +1036,22 @@ class Solution(object):
                     grid[i][j] += min(grid[i][j-1], grid[i-1][j])              
         return grid[-1][-1]
 ```
+## 53. Maximum Subarray
+- 2019-04-22
 
+这题乍看上去需要循环尝试很多，看到一种很厉害的解法：
+```python
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        for i in range(1, len(nums)):
+            if nums[i-1] > 0:
+                nums[i] += nums[i-1]
+        return max(nums)
+```
 
 
 

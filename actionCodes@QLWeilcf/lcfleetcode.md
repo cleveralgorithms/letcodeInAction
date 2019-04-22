@@ -1052,7 +1052,38 @@ class Solution(object):
                 nums[i] += nums[i-1]
         return max(nums)
 ```
+## 74. Search a 2D Matrix
 
+- 2019-04-23
+
+简单搜索比较容易，O(log(n))解法还是挺难想的：
+```
+class Solution(object):
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        if not matrix or target is None:
+            return False
+
+        rows, cols = len(matrix), len(matrix[0])
+        low, high = 0, rows * cols - 1
+        
+        while low <= high:
+            mid = (low + high) / 2
+            num = matrix[mid / cols][mid % cols]
+
+            if num == target:
+                return True
+            elif num < target:
+                low = mid + 1
+            else:
+                high = mid - 1
+        
+        return False
+```
 
 
 

@@ -1084,8 +1084,37 @@ class Solution(object):
         
         return False
 ```
+## 77. Combinations
 
+- 2019-04-24
 
+组合，实现C{n,m}，itertools里有轮子combinations
+```
+if k == 0:
+            return [[]]
+        return [pre + [i] for i in range(k, n+1) for pre in self.combine(i-1, k-1)]
+```
+可能更好理解些：
+```
+class Solution:
+    def combine(self, n, k):
+        stack = []
+        res = []
+        l, x = 0, 1
+        while True:
+            
+            if l == k:
+                res.append(stack[:])
+            if l == k or n-x+1 < k-l:
+                if not stack:
+                    return res
+                x = stack.pop() + 1
+                l -= 1
+            else:
+                stack.append(x)
+                x += 1
+                l += 1
+```
 
 
 

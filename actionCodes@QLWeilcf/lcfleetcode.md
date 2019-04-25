@@ -1134,7 +1134,18 @@ class Solution(object):
             digits.insert(0,1)
         return digits
 ```
+## 78. Subsets
+- 2019-04-26
 
+求一个集合的所有子集，
+```python
+class Solution(object):
+    def subsets(self, nums):
+        res = [[]]
+        for num in sorted(nums):
+            res =res+ [item+[num] for item in res]
+        return res
+```
 
 
 

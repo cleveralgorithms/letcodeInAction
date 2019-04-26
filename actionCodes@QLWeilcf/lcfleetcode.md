@@ -1146,7 +1146,20 @@ class Solution(object):
             res =res+ [item+[num] for item in res]
         return res
 ```
+## 80. Remove Duplicates from Sorted Array II
+- 2019-04-27
 
+要在O(1)空间内实现，就靠循环和if了；
+```python
+class Solution(object):
+    def removeDuplicates(self, nums):
+        i = 0
+        for n in nums:
+            if i < 2 or n > nums[i-2]:
+                nums[i] = n
+                i += 1
+        return i
+```
 
 
 

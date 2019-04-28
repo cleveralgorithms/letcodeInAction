@@ -1146,6 +1146,28 @@ class Solution(object):
             res =res+ [item+[num] for item in res]
         return res
 ```
+## 90. Subsets II
+- 2019-04-29
+
+和原先子集题（78）的区别是这个可以有重复元素；
+```python
+class Solution(object):
+    def subsetsWithDup(self, nums):
+        if not nums:
+            return []
+        nums.sort()
+        res, cur = [[]], []
+        for i in range(len(nums)):
+            if i > 0 and nums[i] == nums[i-1]:
+                cur = [item + [nums[i]] for item in cur]
+            else:
+                cur = [item + [nums[i]] for item in res]
+            res += cur
+        return res
+```
+
+
+
 ## 80. Remove Duplicates from Sorted Array II
 - 2019-04-27
 

@@ -1160,6 +1160,80 @@ class Solution(object):
                 i += 1
         return i
 ```
+## 67. Add Binary
+- 2019-04-28
+
+用二进制的进位逻辑去算，不过输入输出都是字符串，不过就0，1两种字符，不需要转int了
+```python
+class Solution(object):
+    def addBinary(self, a, b):#按逐个进位写的巨长的代码
+        na=len(a)
+        nb=len(b)
+        res=[]
+        rf={'0':0,'1':1}
+        aone=0 #进位 add new one
+        if na<nb:
+            for i in range(na):
+                r=rf[a[na-i-1]]+rf[b[nb-i-1]]+aone
+                if r==3:
+                    res.append('1')
+                    aone=1
+                elif r==2:
+                    res.append('0')
+                    aone=1
+                elif r==1:
+                    res.append('1') #0 or 1
+                    aone=0 #?
+                elif r==0:
+                    res.append('0')
+                    aone=0
+                    
+            for i in range(nb-na-1,-1,-1):
+                r=rf[b[i]]+aone
+                if r==2:
+                    res.append('0') #aone=1
+                elif r==1:
+                    res.append('1')
+                    aone=0
+                elif r==0:
+                    res.append('0')
+                    aone=0
+        else:#na>=nb
+            for i in range(nb):
+                r=rf[a[na-i-1]]+rf[b[nb-i-1]]+aone
+                if r==3:
+                    res.append('1')
+                    aone=1
+                elif r==2:
+                    res.append('0')
+                    aone=1
+                elif r==1:
+                    res.append('1') #0 or 1
+                    aone=0 #?
+                elif r==0:
+                    res.append('0')
+                    aone=0
+            for i in range(na-nb-1,-1,-1):
+                r=rf[a[i]]+aone
+                if r==2:
+                    res.append('0') #aone=1
+                elif r==1:
+                    res.append('1')
+                    aone=0
+                elif r==0:
+                    res.append('0')
+                    aone=0
+        if aone==1:
+            res.append('1')
+        ors=[]
+        for i in range(len(res),0,-1):
+            ors.append(res[i-1])
+        return ''.join(ors)
+```
+而看讨论区，一行代码有：`return bin(eval('0b' + a) + eval('0b' + b))[2:]`，0b means that the number that follows is in binary. `return f"{int(a,2)+int(b,2):b}"`；
+
+
+
 
 
 

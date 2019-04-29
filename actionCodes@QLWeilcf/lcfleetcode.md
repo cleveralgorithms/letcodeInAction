@@ -1254,7 +1254,14 @@ class Solution(object):
 ```
 而看讨论区，一行代码有：`return bin(eval('0b' + a) + eval('0b' + b))[2:]`，0b means that the number that follows is in binary. `return f"{int(a,2)+int(b,2):b}"`；
 
+## 91. Decode Ways
+- 2019-04-30
 
+有趣的题目，标个:star，之后再解。
+
+```python
+# todo
+```
 
 
 

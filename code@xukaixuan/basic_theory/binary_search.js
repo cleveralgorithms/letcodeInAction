@@ -49,7 +49,7 @@ const binaryFindFiRstBig =  (sortedArr,target) =>{
     let high = sortedArr.length-1
     while(low< high){
         const mid = Math.floor((low+high)/2)
-        if (sortedArr[mid]<target){
+        if (sortedArr[mid] >= target){
             if (mid ===0||sortedArr[mid-1]<target) return mid
             high = mid -1
         }else {
@@ -64,7 +64,7 @@ const binaryFindLastSmall =  (sortedArr,target) =>{
     if (sortedArr.length === 0) return -1
     let low = 0
     let high = sortedArr.length-1
-    while(low< high){
+    while(low <=  high){
         const mid = Math.floor((low+high)/2)
         if (sortedArr[mid]<target){
             high = mid -1

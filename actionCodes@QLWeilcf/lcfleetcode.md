@@ -1282,7 +1282,112 @@ WHERE
 ```
 
 
+## 37. 解数独
+（现在上leetcode默认都跳中文官网了）
 
+```python
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        #x,y=(0,0) if self._b[0][0]==0 else self.getNext(0,0)
+        if board[0][0]=='.':#更容易理解的写法
+            self.trysxy(0,0,board)
+        else:
+            x,y=self.getNext(0,0,board)
+            self.trysxy(x,y,board)
+    def checkNotSame(self,x,y,val,board):#检查每行、每列及宫内是否有和b[x,y]相同项
+        for row_item in board[x]: #第x行
+            if row_item==val:
+                return False
+        for rows in board:#y所在列
+            if rows[y]==val:
+                return False
+        ax=x//3*3 #把0~3中的值映射到[0,3]
+        ab=y//3*3
+        for r in range(ax,ax+3):
+            for c in range(ab,ab+3):#注意r==x & c==y的情况下，其实没必要，val不会是0
+                if board[r][c]==val:
+                    return False
+        return True
+    def getNext(self,x,y,board): #得到下一个未填项,从x,y往下数，值等于0就返回新下标
+        for ny in range(y+1,9): #下标是[0,8]
+            if board[x][ny]=='.':
+                return (x,ny)
+        for row in range(x+1,9):
+            for ny in range(0,9):
+                if board[row][ny]=='.':
+                    return (row,ny)
+        return (-1,-1) #不存在下一个未填项的情况
+    def getPrem(self,x,y,board): #得到x，y处可以填的值
+        prem=[]
+        rows=list(board[x])
+        rows.extend([board[i][y] for i in range(9)])
+        cols=set(rows)
+        for i in range(1,10):
+            i=str(i)
+            if i not in cols:
+                prem.append(i)
+        return prem
+    def trysxy(self,x,y,board): #主循环，尝试x，y处的解答
+        if board[x][y]=='.': #不等于0的情况在调用外处理
+            pv=self.getPrem(x,y,board)
+            for v in pv:
+                if self.checkNotSame(x,y,v,board):# 符合 行列宫均满足v符合条件 的
+                    board[x][y]=v
+                    nx,ny=self.getNext(x,y,board) #得到下一个0值格
+                    if nx==-1: #没有下一个0格了；and ny==-1可以写但没必要
+                        return True
+                    else:
+                        _end=self.trysxy(nx,ny,board) #向下尝试,递归
+                        if not _end:
+                            board[x][y]='.' #回溯，继续for v循环
+                            #只需要改x，y处的值，不改其他值
+                        else:
+                            return True
+```
+回溯法，时间效率还行，因为是递归，空间耗费比较大，
+
+```python
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        if board[0][0]!='.':
+            return self.check(0,0,board)
+        else:
+            nx,ny=self.getNext(0,0,board)
+            if nx==-1:
+                return True
+            return self.check(nx,ny,board)
+    def check(self,x,y,b):#检查数独是否合法
+        v=b[x][y]
+        for r in range(0,9):
+            if r!=x:
+                if b[r][y]==v:
+                    return False
+            if r!=y:
+                if b[x][r]==v:
+                    return False
+        ax=x//3*3
+        ab=y//3*3
+        for r in range(ax,ax+3):
+            for c in range(ab,ab+3):
+                if b[r][c]==v and r!=x and c!=y:
+                    return False
+        nx,ny=self.getNext(x,y,b)
+        if nx==-1:
+            return True
+        return self.check(nx,ny,b)
+    def getNext(self,x,y,b):
+        for ny in range(y+1,9):
+            if b[x][ny]!='.':
+                return (x,ny)
+        for r in range(x+1,9):
+            for ny in range(0,9):
+                if b[r][ny]!='.':
+                    return (r,ny)
+        return (-1,-1)
+```
 
 ## 42. Trapping Rain Water
 
